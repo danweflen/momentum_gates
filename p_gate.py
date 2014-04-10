@@ -14,5 +14,10 @@ import sys, itertools, os
 import wigner
 
 datafile_name=sys.argv[1]
-wfn_timeseries=pd.DataFrame(np.loadtxt(datafile_name).transpose())
+raw_data=np.load(datafile_name)
+tp=raw_data.transpose()
+wavefunction=np.vectorize(complex)(tp[2],tp[3])
+complexified_data=np.array([tp[0],tp[1],wavefunction]).transpose()
+wfn_timeseries=pd.DataFrame(complexified_data, columns=["time","x","wavefunction"])
+del complexified_data, raw_data, tp, wavefunction
 print wfn_timeseries
