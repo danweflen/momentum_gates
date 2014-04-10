@@ -17,7 +17,7 @@ datafile_name=sys.argv[1]
 raw_data=np.load(datafile_name)
 tp=raw_data.transpose()
 wavefunction=np.vectorize(complex)(tp[2],tp[3])
-complexified_data=np.array([tp[0],tp[1],wavefunction]).transpose()
-wfn_timeseries=pd.DataFrame(complexified_data, columns=["time","x","wavefunction"])
-del complexified_data, raw_data, tp, wavefunction
+wfn_df=pd.DataFrame({"time":tp[0],"x":tp[1], "wavefunction":wavefunction})
+wfn_timeseries=wfn_df.pivot(index="time",columns="x", values="wavefunction")
+del raw_data, tp, wavefunction, wfn_df
 print wfn_timeseries
