@@ -14,12 +14,8 @@ import sys, itertools, os
 import wigner
 
 datafile_name=sys.argv[1]
-raw_data=np.load(datafile_name)
-tp=raw_data.transpose()
-wavefunction=np.vectorize(complex)(tp[2],tp[3])
-wfn_df=pd.DataFrame({"time":tp[0],"x":tp[1], "wavefunction":wavefunction})
-wfn_timeseries=wfn_df.pivot(index="time",columns="x", values="wavefunction")
-store=pd.HDFStore(datafile_name+".h5")
-store['wavefunction']=wfn_timeseries
-del raw_data, tp, wavefunction, wfn_df
-print wfn_timeseries
+store=pd.HDFStore(datafile_name)
+wfn_timeseries=store['wavefunction']
+print wfn_timeseries[10]
+
+wigner.plotExample()
