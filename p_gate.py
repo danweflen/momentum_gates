@@ -40,6 +40,6 @@ def animate(i):
 
 #Animating and saving the resulting video.
 anim=animation.FuncAnimation(fig, animate, frames=300)
-anim.save("test_animation.mp4")
+anim.save("test_animation.ogv")
 
 plt.show()
