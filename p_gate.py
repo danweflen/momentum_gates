@@ -41,5 +41,6 @@ def animate(i):
 
 #Animating and saving the resulting video.
 anim=animation.FuncAnimation(fig, animate, frames=125)
+print "Animation object created"
 anim.save("5e+13.mp4", fps=10)
 
