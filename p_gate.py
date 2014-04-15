@@ -33,13 +33,13 @@ ax=fig.add_subplot(111,autoscale_on=False, xlim=(-10,10), ylim=(-2,2))
 
 #Animate function: this is called sequentially by FuncAnimation
 def animate(i):
+    fig.clf()
     wavefunction=np.array([wfn_timeseries[10*i+10][x/100.0] for x in range(-5000,5000)])
     wigner_function=wigner.wdf(wavefunction)
     image=ax.contourf(T.transpose(), S.transpose(), wigner_function, cmap='jet')
     return image
 
 #Animating and saving the resulting video.
-anim=animation.FuncAnimation(fig, animate, frames=300)
-anim.save("test_animation.ogv")
+anim=animation.FuncAnimation(fig, animate, frames=125)
+anim.save("5e+13.mp4", fps=10)
 
-plt.show()
