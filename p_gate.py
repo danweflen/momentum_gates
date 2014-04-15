@@ -38,12 +38,11 @@ ax=fig.add_subplot(111,autoscale_on=False, xlim=(-10,10), ylim=(-2,2))
 
 #Animate function: this is called sequentially by FuncAnimation
 def animate(i):
-    wavefunction=wfn_timeseries[10*i+10].values
-    wigner_function=wigner.wdf(wavefunction)
+    wigner_function=wigner.wdf(wfn_timeseries[10*i+10].values)
     wigner_figure.set_data(T.transpose(), S.transpose(),wigner_function)
     return wigner_figure
 
 #Animating and saving the resulting video.
-anim=animation.FuncAnimation(fig, animate, frames=125)
-anim.save("5e+13.mp4", fps=10)
+anim=animation.FuncAnimation(fig, animate, frames=260)
+anim.save("5e+13.mp4", fps=20)
 
