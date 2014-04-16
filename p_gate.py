@@ -19,28 +19,30 @@ import wigner
 datafile_name=sys.argv[1]
 store=pd.HDFStore(datafile_name)
 wfn_timeseries=store['wavefunction']
-wavefunction=np.array([wfn_timeseries[10][x/100.0] for x in range(-5000,5000)])
+wavefunction=wfn_timeseries[10].values
 N=wavefunction.size
 t=sp.linspace(-50,50,N)
 ell = sp.asarray(range(0,N)) - N/2
 dt = t[1]-t[0]
 s =  ell / (dt * N) 
 T, S = sp.meshgrid(t,s)
+del t,s
 
 #Creating the figure and setting the figure parameters.
 fig=plt.figure()
+plt.xlabel("x")
+plt.ylabel("p")
+wigner_function=wigner.wdf(wavefunction)
+wigner_figure, =ax.contourf(T.transpose(), S.transpose(), wigner_function, cmap="jet")
 ax=fig.add_subplot(111,autoscale_on=False, xlim=(-10,10), ylim=(-2,2))
 
 #Animate function: this is called sequentially by FuncAnimation
 def animate(i):
-    fig.clf()
-    wavefunction=np.array([wfn_timeseries[10*i+10][x/100.0] for x in range(-5000,5000)])
-    wigner_function=wigner.wdf(wavefunction)
-    image=ax.contourf(T.transpose(), S.transpose(), wigner_function, cmap='jet')
-    return image
+    wigner_function=wigner.wdf(wfn_timeseries[10*i+10].values)
+    wigner_figure.set_data(T.transpose(), S.transpose(),wigner_function)
+    return wigner_figure
 
 #Animating and saving the resulting video.
-anim=animation.FuncAnimation(fig, animate, frames=125)
-print "Animation object created"
-anim.save("5e+13.mp4", fps=10)
+anim=animation.FuncAnimation(fig, animate, frames=260)
+anim.save("5e+13.mp4", fps=20)
 
