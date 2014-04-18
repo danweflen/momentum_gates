@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Wall Clock time
-#PBS -l walltime=8:00:00
+#PBS -l walltime=48:00:00
 
 #Merge stdout and stderr
 #PBS -j oe
