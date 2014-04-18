@@ -8,7 +8,7 @@
 #PBS -j oe
 
 #Output file for stdout
-#PBS -o /users/becker/weflen/npsf_h/npsf_h.out
+#PBS -o /home/becker/weflen/momentum_gates/reserve_space.out
 
 #Sets my email
 #PBS -M weflen@colorado.edu
