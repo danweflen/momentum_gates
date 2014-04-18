@@ -3,3 +3,5 @@
 *.png
 data
 *.mp4
+*~
+*.out
