@@ -24,7 +24,7 @@ N=wavefunction.size
 t=sp.linspace(-50,50,N)
 ell = sp.asarray(range(0,N)) - N/2
 dt = t[1]-t[0]
-s =  ell / (dt * N) 
+s =  ell / (dt * N)
 T, S = sp.meshgrid(t,s)
 del t,s
 
