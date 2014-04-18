@@ -33,8 +33,8 @@ fig=plt.figure()
 plt.xlabel("x")
 plt.ylabel("p")
 wigner_function=wigner.wdf(wavefunction)
-wigner_figure, =ax.contourf(T.transpose(), S.transpose(), wigner_function, cmap="jet")
 ax=fig.add_subplot(111,autoscale_on=False, xlim=(-10,10), ylim=(-2,2))
+wigner_figure, =ax.contourf(T.transpose(), S.transpose(), wigner_function, cmap="jet")
 
 #Animate function: this is called sequentially by FuncAnimation
 def animate(i):
