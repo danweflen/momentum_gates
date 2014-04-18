@@ -17,3 +17,5 @@
 #PBS -m a
 
 sleep 3h
+
+echo "done!\n"
