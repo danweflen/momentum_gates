@@ -1,20 +1,20 @@
 #!/usr/bin/env python
+import matplotlib
+matplotlib.use("AGG")
 import matplotlib.pyplot as plt
 import scipy as sp
 import scipy.fftpack as ft
 import scipy.linalg as lin
 import numpy as np
-import npsf_interface as npsf
-import ionization_utilities as ion
 import pandas as pd
 import math
 from multiprocessing import Pool
 from matplotlib import animation
 from string import *
-import sys, itertools, os
+import sys, itertools
 import wigner
 
-time=1843.128
+time=1756.188
 datafile_name=sys.argv[1]
 store=pd.HDFStore(datafile_name)
 wfn_timeseries=store['wavefunction']
@@ -37,7 +37,7 @@ ax.set_ylabel("p")
 ax.set_title("Wigner distribution, time="+str(time)+"au")
 ax.contourf(T.transpose(), S.transpose(), wigner_function, cmap="jet")
 
-plt.show()
+plt.savefig("/users/becker/weflen/momentum_gates/wigner_"+str(time)+"au.png")
 
 store.close()
 
