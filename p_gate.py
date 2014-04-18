@@ -1,11 +1,11 @@
 #!/usr/bin/env python
+import matplotlib
+matplotlib.use("GDK")
 import matplotlib.pyplot as plt
 import scipy as sp
 import scipy.fftpack as ft
 import scipy.linalg as lin
 import numpy as np
-import npsf_interface as npsf
-import ionization_utilities as ion
 import pandas as pd
 import math
 from multiprocessing import Pool
@@ -39,10 +39,11 @@ wigner_figure, =ax.contourf(T.transpose(), S.transpose(), wigner_function, cmap=
 #Animate function: this is called sequentially by FuncAnimation
 def animate(i):
     wigner_function=wigner.wdf(wfn_timeseries[10*i+10].values)
-    wigner_figure.set_data(T.transpose(), S.transpose(),wigner_function)
+    wigner_figure=ax.contourf(T.transpose(), S.transpose(), wigner_function, cmap="jet")
     return wigner_figure
 
 #Animating and saving the resulting video.
 anim=animation.FuncAnimation(fig, animate, frames=260)
-anim.save("5e+13.mp4", fps=20)
+store.close()
+anim.save("/users/becker/weflen/momentum_gates/norio.mp4", fps=20)
 
