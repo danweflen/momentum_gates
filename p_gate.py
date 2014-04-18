@@ -1,11 +1,11 @@
 #!/usr/bin/env python
+import matplotlib
+matplotlib.use("GDK")
 import matplotlib.pyplot as plt
 import scipy as sp
 import scipy.fftpack as ft
 import scipy.linalg as lin
 import numpy as np
-import npsf_interface as npsf
-import ionization_utilities as ion
 import pandas as pd
 import math
 from multiprocessing import Pool
@@ -24,7 +24,7 @@ N=wavefunction.size
 t=sp.linspace(-50,50,N)
 ell = sp.asarray(range(0,N)) - N/2
 dt = t[1]-t[0]
-s =  ell / (dt * N) 
+s =  ell / (dt * N)
 T, S = sp.meshgrid(t,s)
 del t,s
 
@@ -33,16 +33,17 @@ fig=plt.figure()
 plt.xlabel("x")
 plt.ylabel("p")
 wigner_function=wigner.wdf(wavefunction)
-wigner_figure, =ax.contourf(T.transpose(), S.transpose(), wigner_function, cmap="jet")
 ax=fig.add_subplot(111,autoscale_on=False, xlim=(-10,10), ylim=(-2,2))
+wigner_figure=ax.contourf(T.transpose(), S.transpose(), wigner_function, cmap="jet")
 
 #Animate function: this is called sequentially by FuncAnimation
 def animate(i):
     wigner_function=wigner.wdf(wfn_timeseries[10*i+10].values)
-    wigner_figure.set_data(T.transpose(), S.transpose(),wigner_function)
+    wigner_figure=ax.contourf(T.transpose(), S.transpose(), wigner_function, cmap="jet")
     return wigner_figure
 
 #Animating and saving the resulting video.
 anim=animation.FuncAnimation(fig, animate, frames=260)
-anim.save("5e+13.mp4", fps=20)
+store.close()
+anim.save("/users/becker/weflen/momentum_gates/norio.mp4", fps=20)
 
