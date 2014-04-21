@@ -33,13 +33,13 @@ fig=plt.figure()
 plt.xlabel("x")
 plt.ylabel("p")
 wigner_function=wigner.wdf(wavefunction)
-ax=fig.add_subplot(111,autoscale_on=False, xlim=(-10,10), ylim=(-2,2))
-wigner_figure, =ax.contourf(T.transpose(), S.transpose(), wigner_function, cmap="jet")
+ax=fig.add_subplot(111,autoscale_on=False, xlim=(-10,10), ylim=(-1.5,1.5))
+wigner_figure =ax.contourf(T.transpose(), S.transpose(), wigner_function, cmap="jet")
 
 #Animate function: this is called sequentially by FuncAnimation
 def animate(i):
-    wigner_function=wigner.wdf(wfn_timeseries[10*i+10].values)
-    wigner_figure=ax.contourf(T.transpose(), S.transpose(), wigner_function, cmap="jet")
+    wigner_function=-1*wigner.wdf(wfn_timeseries[10*i+10].values)
+    wigner_figure=ax.contourf(T.transpose(), S.transpose(), wigner_function, cmap="RdBu")
     return wigner_figure
 
 #Animating and saving the resulting video.

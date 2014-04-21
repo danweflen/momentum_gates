@@ -43,15 +43,12 @@ s =  ell / (dt * N)
 T, S = sp.meshgrid(t,s)
 del t,s
 
-fig=plt.figure()
-wigner_function=wigner.wdf(wavefunction)
-ax=fig.add_subplot(111,autoscale_on=False, xlim=(-10,10), ylim=(-2,2))
+wigner_function=-1*wigner.wdf(wavefunction)
+ax=fig.add_subplot(111,autoscale_on=False, xlim=(-10,10), ylim=(-1.5,1.5))
 ax.set_xlabel("x")
 ax.set_ylabel("p")
 ax.set_title("Wigner distribution, time="+str(time)+"au")
-ax.contourf(T.transpose(), S.transpose(), wigner_function, cmap="jet")
-
+ax.contourf(T.transpose(), S.transpose(), wigner_function,cmap="RdBu")
 plt.savefig("/users/becker/weflen/momentum_gates/wigner_"+str(time)+"au.png")
-
 store.close()
 
