@@ -18,7 +18,7 @@
 #Don't rerun a job if it fails
 #PBS -r n
 
-#PBS -l nodes=1:ppn=4
+#PBS -l nodes=1:ppn=1
 
 #PBS -N animate_wigner
 
