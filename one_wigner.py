@@ -2,7 +2,7 @@
 import_unsuccessful=True
 while(import_unsuccessful):
     try:
-        import sys, itertools
+        import sys, itertools, os
         import matplotlib
         matplotlib.use("AGG")
         import matplotlib.pyplot as plt
@@ -20,11 +20,20 @@ while(import_unsuccessful):
     except (ImportError):
         import_unsuccessful=True
 
-
-time=1843.128
+times=[1756.188,1773.576,1790.964,1808.352,1825.74,1843.128]
+nprocs=len(times)
 datafile_name=sys.argv[1]
 store=pd.HDFStore(datafile_name)
 wfn_timeseries=store['wavefunction']
+fig=plt.figure()
+
+procid=0 #Forks the program into nprocs programs, each with a procid from 0 to nprocs-1
+for x in range(1,nprocs):
+    if (os.fork()==0):
+        procid=x
+        break
+
+time=times[procid]
 wavefunction=wfn_timeseries[time].values
 N=wavefunction.size
 t=np.array(wfn_timeseries.index)
