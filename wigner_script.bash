@@ -22,15 +22,12 @@
 
 #PBS -N one_wigner
 
-export PYTHONPATH=$PYTHONPATH:users/becker/weflen/npsf_h/npsflib/python
+export PYTHONPATH=$PYTHONPATH:/users/becker/weflen/npsf_h/npsflib/python
 export PATH=/users/becker/weflen/progs/anaconda/bin:$PATH:/usr/local/cuda/bin
 
 DATA_DIR=/data/becker/weflen/poly/momentum_gate_norio_exact/
 
 DATA_FILE=$DATA_DIR/momentum_gate_norio_exact/wavefunction_file_key_2000.wfn.h5
 
-echo $PYTHONPATH
-echo $PATH
-
-/home/becker/weflen/momentum_gates/one_wigner.py $DATA_FILE
+/users/becker/weflen/momentum_gates/one_wigner.py $DATA_FILE
 
