@@ -1,31 +1,36 @@
 #!/usr/bin/env python
-import matplotlib
-matplotlib.use("AGG")
-import matplotlib.pyplot as plt
-import scipy as sp
-import scipy.fftpack as ft
-import scipy.linalg as lin
-import numpy as np
-import pandas as pd
-import math
-from multiprocessing import Pool
-from matplotlib import animation
-from string import *
-import sys, itertools
-import wigner
+import_unsuccessful=True
+while(import_unsuccessful):
+    try:
+        import sys, itertools
+        import matplotlib
+        matplotlib.use("AGG")
+        import matplotlib.pyplot as plt
+        import scipy as sp
+        import scipy.fftpack as ft
+        import scipy.linalg as lin
+        import numpy as np
+        import pandas as pd
+        import math
+        from multiprocessing import Pool
+        from matplotlib import animation
+        from string import *
+        import wigner
+        import_unsuccessful=False
+    except (ImportError):
+        import_unsuccessful=True
 
-time=1756.188
+
+time=1843.128
 datafile_name=sys.argv[1]
 store=pd.HDFStore(datafile_name)
 wfn_timeseries=store['wavefunction']
 wavefunction=wfn_timeseries[time].values
 N=wavefunction.size
-t=sp.linspace(-299.9736,299.9736,N)
+t=np.array(wfn_timeseries.index)
 ell = sp.asarray(range(0,N)) - N/2
 dt = t[1]-t[0]
-print dt
 s =  ell / (dt * N)
-print s[1]-s[0]
 T, S = sp.meshgrid(t,s)
 del t,s
 
