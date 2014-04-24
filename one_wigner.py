@@ -14,11 +14,11 @@ from matplotlib import animation
 from string import *
 from my_wigner import wigner_distribution
 
-times=[1756.188,1773.576,1790.964,1808.352,1825.74,1843.128]
-nprocs=len(times)
 datafile_name=sys.argv[1]
 store=pd.HDFStore(datafile_name)
 wfn_timeseries=store['wavefunction']
+times=filter(lambda x: x>1750 and x<1850, wfn_timeseries.columns)
+nprocs=len(times)
 fig=plt.figure()
 
 procid=0 #Forks the program into nprocs programs, each with a procid from 0 to nprocs-1
@@ -35,7 +35,7 @@ ell = sp.asarray(range(0,N)) - N/2
 dt = t[1]-t[0]
 s =  ell / (dt * N)
 T, S = sp.meshgrid(t,s)
-del t,s
+del t,s,wfn_timeseries
 
 wigner_function=-1*wigner.wdf(wavefunction)
 ax=fig.add_subplot(111,autoscale_on=False, xlim=(-10,10), ylim=(-1.5,1.5))
