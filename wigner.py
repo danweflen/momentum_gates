@@ -24,6 +24,7 @@
 
 import scipy as sp
 import scipy.fftpack as ft
+import math
 
 def wdf(x):
     '''
@@ -46,7 +47,7 @@ def wdf(x):
     N = x.size
     # make f a column vector
     x = x.reshape(N,1)
-    X = ft.fft(x, axis=0) 
+    X = ft.fft(x, axis=0)
 
     # shift row vector
     shift = sp.array(range(0,N)).reshape(1,N) - N/2.0
@@ -59,12 +60,12 @@ def wdf(x):
     # shift function to the left, f(x+\tau/2) and to the right f(x-\tau/2)
     # via Fourier shifting theorem
     arg = ft.fftshift(2.0J*sp.pi/N * sp.dot(k, shift), axes=(1,))
-    xShiftedLeft = ft.ifft(sp.dot(X,ones) * sp.exp(arg/2.0), axis=0)
-    xShiftedRight = ft.ifft( sp.dot(X,ones) * sp.exp(-arg/2.0), axis=0)
+    xShiftedLeft = ft.ifft(sp.dot(X,ones) * sp.exp(arg), axis=0)
+    xShiftedRight = ft.ifft( sp.dot(X,ones) * sp.exp(-arg), axis=0)
     # each column of fShifted is shifted by the same amount.
     
     W = ft.fft(xShiftedLeft * xShiftedRight.conjugate())
-    return sp.real(W) 
+    return sp.real(W)/sp.pi
 #---------------------------------------------------------------------------------------------------
 def plotExample():
     '''
