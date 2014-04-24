@@ -26,5 +26,7 @@ DATA_DIR=/data/becker/weflen/poly/momentum_gate_norio/
 
 FILE=$DATA_DIR/momentum_gate_norio/wavefunction_file_key_2000.wfn.h5
 
+PATH=$PATH:~/progs:~/progs/bin:/usr/local/mpich2/bin:/usr/local/mpich2-1.0.7/bin
+
 /home/becker/weflen/momentum_gates/p_gate.py $FILE
 
