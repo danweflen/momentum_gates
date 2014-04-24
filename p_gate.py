@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import matplotlib
-matplotlib.use("GDK")
+matplotlib.use("PS")
 import matplotlib.pyplot as plt
 import scipy as sp
 import scipy.fftpack as ft
