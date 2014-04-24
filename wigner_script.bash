@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Wall Clock time
-#PBS -l walltime=4:00:00
+#PBS -l walltime=6:00:00
 
 #Merge stdout and stderr
 #PBS -j oe
@@ -31,3 +31,4 @@ DATA_FILE=$DATA_DIR/momentum_gate_norio_exact/wavefunction_file_key_2000.wfn.h5
 
 /users/becker/weflen/momentum_gates/one_wigner.py $DATA_FILE
 
+echo "Done"
