@@ -1,24 +1,18 @@
 #!/usr/bin/env python
-import_unsuccessful=True
-while(import_unsuccessful):
-    try:
-        import sys, itertools, os
-        import matplotlib
-        matplotlib.use("AGG")
-        import matplotlib.pyplot as plt
-        import scipy as sp
-        import scipy.fftpack as ft
-        import scipy.linalg as lin
-        import numpy as np
-        import pandas as pd
-        import math
-        from multiprocessing import Pool
-        from matplotlib import animation
-        from string import *
-        import wigner
-        import_unsuccessful=False
-    except (ImportError):
-        import_unsuccessful=True
+import sys, itertools, os
+import matplotlib
+matplotlib.use("PS")
+import matplotlib.pyplot as plt
+import scipy as sp
+import scipy.fftpack as ft
+import scipy.linalg as lin
+import numpy as np
+import pandas as pd
+import math
+from multiprocessing import Pool
+from matplotlib import animation
+from string import *
+from my_wigner import wigner_distribution
 
 times=[1756.188,1773.576,1790.964,1808.352,1825.74,1843.128]
 nprocs=len(times)
