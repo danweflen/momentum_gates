@@ -5,3 +5,6 @@ data
 *.mp4
 *~
 *.out
+*#
+.*.py
+*.npy
