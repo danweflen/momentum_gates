@@ -72,7 +72,7 @@ def plotExample():
     Example of wdf contour plot.
     '''
     import matplotlib.pyplot as plt
-    N = 500
+    N = 50
     t = sp.linspace(-5,5,N)
     x = sp.exp(-t**2)
     W = wdf(x)
@@ -87,4 +87,5 @@ def plotExample():
     plt.contourf(T.transpose(), S.transpose(), W)
     plt.xlabel('t', fontsize=16)
     plt.ylabel('s', fontsize=16)
+    plt.colorbar()
     plt.show()
