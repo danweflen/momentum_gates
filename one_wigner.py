@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import sys, itertools, os
 import matplotlib
-matplotlib.use("PS")
+matplotlib.use("AGG")
 import matplotlib.pyplot as plt
 import scipy as sp
 import scipy.fftpack as ft
@@ -17,7 +17,7 @@ from my_wigner import wigner_distribution
 datafile_name=sys.argv[1]
 store=pd.HDFStore(datafile_name)
 wfn_timeseries=store['wavefunction']
-times=filter(lambda x: x>1750 and x<1850, wfn_timeseries.columns)
+times=filter(lambda x: x>1750 and x<1780, wfn_timeseries.columns)
 nprocs=len(times)
 fig=plt.figure()
 
@@ -38,11 +38,12 @@ T, S = sp.meshgrid(t,s)
 del t,s,wfn_timeseries
 
 wigner_function=wigner_distribution(wavefunction)
-ax=fig.add_subplot(111, xlim=(-10,10), ylim=(-1.5,1.5))
-ax.set_xlabel("x")
-ax.set_ylabel("p")
-ax.set_title("Wigner distribution, time="+str(time)+"au")
-ax.contourf(T.transpose(), S.transpose(), wigner_function,cmap="RdBu")
+wig_ax=fig.add_subplot(111, xlim=(-10,10), ylim=(-1.5,1.5))
+wig_ax.set_xlabel("x")
+wig_ax.set_ylabel("p")
+wig_ax.set_title("Wigner distribution, time="+str(time)+"au")
+wig_ax.contourf(T.transpose(), S.transpose(), wigner_function,20,cmap="RdBu")
+plt.colorbar(ax=wig_ax,cax=wig_ax)
 plt.savefig("/users/becker/weflen/momentum_gates/wigner_"+str(time)+"au.png")
 store.close()
 
