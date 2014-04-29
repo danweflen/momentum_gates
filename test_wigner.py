@@ -6,9 +6,9 @@ import matplotlib.pyplot as plt
 
 grid=np.arange(-10,10,0.05)
 arg=np.fmax(np.exp(-(grid)**2),np.zeros(grid.size))
-x=np.arange(-10,10.05,0.05).reshape((1,grid.size+1))
-p=np.arange(-10,10.05,0.05).reshape((grid.size+1,1))
-ana=np.sqrt(1/(2*sp.pi))*np.exp(-2*x**2)*np.exp(-2*np.pi*p*p)
+x=np.arange(-10,10.05,0.05).reshape((1,grid.size))
+p=np.arange(-10,10.05,0.05).reshape((grid.size,1))
+ana=np.sqrt(1/(2*pi))*np.exp(-2*x**2)*np.exp(-pi**2*p**2/2)
 xgrid=np.ones(grid.size).reshape((grid.size,1))*x
 pgrid=np.ones(grid.size).reshape((1,grid.size))*p
 wig=wigner_distribution(arg)*0.05
