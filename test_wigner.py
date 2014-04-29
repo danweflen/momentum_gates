@@ -1,4 +1,5 @@
 #! /usr/bin/env python
+from math import pi
 import numpy as np
 import scipy as sp
 from my_wigner import wigner_distribution

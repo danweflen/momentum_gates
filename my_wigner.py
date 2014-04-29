@@ -1,4 +1,4 @@
-import math
+from math import pi
 import scipy as sp
 import scipy.fftpack as ft
 import numpy as np
@@ -19,12 +19,12 @@ def wigner_distribution(psi):
             psi_copy_low[-shift:]=0.0
         acorr=psi_copy_low*np.conj(psi_copy_low[::-1])
         ftrans=ft.ifft(acorr,overwrite_x=True)
-        ftrans=ftrans*ftrans.size/sp.pi
+        ftrans=ftrans*ftrans.size/pi
         #Removing the linear phase induced by the fft function
         #considering the first element as 0 rather than the
         #middle element. This uses the fourier shifting theorem.
         shift=ftrans.size/2+1
-        permuted_fft=ftrans*np.exp(-2j*math.pi*shift*np.arange(0,ftrans.size)/ftrans.size)
+        permuted_fft=ftrans*np.exp(-2j*pi*shift*np.arange(0,ftrans.size)/ftrans.size)
         #Shifting the fft itself back into place.
         ftrans=ft.fftshift(permuted_fft)
         wigner[position]=ftrans
