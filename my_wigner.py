@@ -18,8 +18,8 @@ def wigner_distribution(psi):
         elif shift>0:
             psi_copy_low[-shift:]=0.0
         acorr=psi_copy_low*np.conj(psi_copy_low[::-1])
-        ftrans=ft.fft(acorr,overwrite_x=True)
-        ftrans=1/sp.pi*ftrans
+        ftrans=ft.ifft(acorr,overwrite_x=True)
+        ftrans=ftrans*ftrans.size/sp.pi
         #Removing the linear phase induced by the fft function
         #considering the first element as 0 rather than the
         #middle element. This uses the fourier shifting theorem.
