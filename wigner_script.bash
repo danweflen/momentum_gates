@@ -18,7 +18,7 @@
 #Don't rerun a job if it fails
 #PBS -r n
 
-#PBS -l nodes=1:ppn=2
+#PBS -l nodes=1:ppn=6
 
 #PBS -N one_wigner
 
