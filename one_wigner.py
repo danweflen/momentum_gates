@@ -18,6 +18,7 @@ datafile_name=sys.argv[1]
 store=pd.HDFStore(datafile_name)
 wfn_timeseries=store['wavefunction']
 times=filter(lambda x: x>1750 and x<1850, wfn_timeseries.columns)
+print times
 nprocs=len(times)
 fig=plt.figure()
 
@@ -28,6 +29,7 @@ for x in range(1,nprocs):
         break
 
 time=times[procid]
+print time
 wavefunction=wfn_timeseries[time].values
 N=wavefunction.size
 t=np.array(wfn_timeseries.index)
@@ -42,8 +44,8 @@ wig_ax=fig.add_subplot(111, xlim=(-10,10), ylim=(-1.5,1.5))
 wig_ax.set_xlabel("x")
 wig_ax.set_ylabel("p")
 wig_ax.set_title("Wigner distribution, time="+str(time)+"au")
-wig_ax.contourf(T.transpose(), S.transpose(), np.real(wigner_function.transpose()),200,cmap="RdBu")
-#plt.colorbar()
+image=wig_ax.contourf(T.transpose(), S.transpose(), np.real(wigner_function.transpose()),200,cmap="RdBu")
+fig.colorbar(image)
 plt.savefig("/users/becker/weflen/momentum_gates/wigner_"+str(time)+"au.png")
 store.close()
 
