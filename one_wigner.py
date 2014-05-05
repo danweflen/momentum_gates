@@ -39,7 +39,7 @@ s =  ell / (dt * N)
 T, S = sp.meshgrid(t,s)
 del t,s,wfn_timeseries
 
-wigner_function=wigner_distribution(wavefunction)
+wigner_function=wigner_distribution_2(wavefunction)
 wig_ax=fig.add_subplot(111, xlim=(-10,10), ylim=(-1.5,1.5))
 wig_ax.set_xlabel("x")
 wig_ax.set_ylabel("p")
