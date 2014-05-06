@@ -41,13 +41,7 @@ def wigner_distribution_2(psi):
         acorr=up*down
         ftrans=np.fft.irfft(acorr,n=npts)
         ftrans=ftrans*ftrans.size/pi
-        #Removing the linear phase induced by the fft function
-        #considering the first element as 0 rather than the
-        #middle element. This uses the fourier shifting theorem.
-        shift=ftrans.size/2+1
-        #permuted_fft=ftrans*np.exp(-2j*pi*shift*np.arange(0,ftrans.size)/ftrans.size)
-        permuted_fft=ftrans
         #Shifting the fft itself back into place.
-        ftrans=ft.fftshift(permuted_fft)
+        ftrans=ft.fftshift(ftrans)
         wigner[position]=ftrans
     return wigner.transpose()
