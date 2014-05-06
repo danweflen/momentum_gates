@@ -34,8 +34,8 @@ wavefunction=wfn_timeseries[time].values
 N=wavefunction.size
 t=np.array(wfn_timeseries.index)
 ell = sp.asarray(range(0,N)) - N/2
-dt = t[1]-t[0]
-s =  ell / (dt * N)
+dx = t[1]-t[0]
+s = np.fft.rfftfreq(N,dx)
 T, S = sp.meshgrid(t,s)
 del t,s,wfn_timeseries
 
