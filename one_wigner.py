@@ -17,7 +17,7 @@ from my_wigner import wigner_distribution_2
 datafile_name=sys.argv[1]
 store=pd.HDFStore(datafile_name)
 wfn_timeseries=store['wavefunction']
-times=filter(lambda x: x>1750 and x<1850, wfn_timeseries.columns)
+times=filter(lambda x: x>1750 and x<1860, wfn_timeseries.columns)
 print times
 nprocs=len(times)
 fig=plt.figure()
