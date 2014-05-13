@@ -38,6 +38,8 @@ def wigner_distribution_2(psi):
     for position in np.arange(0,npts):
         width=min(position, npts-position)
         up=psi[position:position+width]
+        #position-width or None evaluates to None when
+        #position-width is equal to zero.
         down=psi[position:position-width or None:-1]
         acorr=up*np.conj(down)
         ftrans=np.fft.irfft(acorr,n=npts)
