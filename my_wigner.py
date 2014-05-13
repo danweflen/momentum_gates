@@ -18,7 +18,7 @@ def wigner_distribution(psi):
         elif shift>0:
             psi_copy_low[-shift:]=0.0
         acorr=psi_copy_low*np.conj(psi_copy_low[::-1])
-        ftrans=ft.ifft(acorr,overwrite_x=True)
+        ftrans=ft.ifft(acorr)
         ftrans=ftrans*ftrans.size/pi
         #Removing the linear phase induced by the fft function
         #considering the first element as 0 rather than the
@@ -28,6 +28,8 @@ def wigner_distribution(psi):
         #Shifting the fft itself back into place.
         ftrans=ft.fftshift(permuted_fft)
         wigner[position]=ftrans
+    print "Average Imaginary Part: ", np.average(np.imag(wigner))
+    wigner=np.real(wigner)
     return wigner.transpose()
 
 def wigner_distribution_2(psi):
