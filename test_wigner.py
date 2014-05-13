@@ -14,11 +14,12 @@ ana=np.sqrt(1/(2*pi))*np.exp(-2*x**2)*np.exp(-pi**2*p**2/2)
 xgrid=np.ones(grid.size).reshape((grid.size,1))*x
 pgrid=np.ones(grid.size).reshape((1,grid.size))*p
 start=time.time()
-wig=wigner_distribution_2(arg)*(grid[1]-grid[0])
+wig=wigner_distribution(arg)*(grid[1]-grid[0])
+wig2=wigner_distribution_2(arg)*(grid[1]-grid[0])
 end=time.time()
 print "Wigner calculation time: ", end-start
 real=wig
-test=real-ana
+test=wig-wig2
 #test=2*(ana-real)/(ana+real)
 print "ana[0,0]: ", ana[0,0]
 print "real[0,0]: ", real[0,0]
@@ -38,4 +39,4 @@ plt.xlim(-10,10)
 plt.ylim(-10,10)
 np.save("real.npy",real)
 plt.savefig("test.png")
-
+plt.show()
