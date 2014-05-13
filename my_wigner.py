@@ -6,7 +6,7 @@ import numpy as np
 def wigner_distribution(psi):
     #psi is assumed to be a numpy array
     if psi.size%2==0:
-        psi=np.pad(psi, (0,1),mode="constant")
+        raise ValueError
     npts=psi.size
     wigner=sp.zeros((npts,npts), complex)
     for position in np.arange(0,npts):
