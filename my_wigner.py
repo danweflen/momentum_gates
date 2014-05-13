@@ -38,12 +38,12 @@ def wigner_distribution_2(psi):
     for position in np.arange(0,npts):
         width=min(position, npts-position)
         up=psi[position:position+width]
-        pre_down=psi[position-width+1:position+1]
-        down=pre_down[::-1]
-        acorr=up*down
+        down=psi[position:position-width or None:-1]
+        acorr=up*np.conj(down)
         ftrans=np.fft.irfft(acorr,n=npts)
         ftrans=ftrans*ftrans.size/pi
         #Shifting the fft itself back into place.
         ftrans=ft.fftshift(ftrans)
         wigner[position]=ftrans
     return wigner.transpose()
+
