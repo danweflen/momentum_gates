@@ -13,7 +13,7 @@ import math
 from multiprocessing import Pool
 from matplotlib import animation
 from string import *
-from my_wigner import wigner_distribution
+from my_wigner import wigner_distribution, wigner_distribution_2
 
 datafile_name=sys.argv[1]
 store=pd.HDFStore(datafile_name)
@@ -41,14 +41,15 @@ s =  2*ell / (dx * N)
 T, S = sp.meshgrid(t,s)
 del t,s,wfn_timeseries
 
-wigner_function=dx*wigner_distribution(wavefunction)
+wigner_function=dx*wigner_distribution_2(wavefunction)
 wig_ax=fig.add_subplot(111, xlim=(-10,10), ylim=(-1.5,1.5))
 wig_ax.set_xlabel("x")
 wig_ax.set_ylabel("p")
 wig_ax.set_title("Wigner distribution, time="+str(time)+"au")
-levels=np.array([x/200.0 for x in range(-70,70)])
-image=wig_ax.contourf(T.transpose(), S.transpose(), np.real(wigner_function.transpose()),levels,cmap="RdBu")
+levels=np.arange(-0.35,0.35,0.01)
+image=wig_ax.contour(T.transpose(), S.transpose(), np.real(wigner_function.transpose()),levels,cmap="RdBu")
 fig.colorbar(image)
 plt.savefig("/users/becker/weflen/momentum_gates/wigner_"+str(time)+"au.png")
 store.close()
 sleep(30)
+
