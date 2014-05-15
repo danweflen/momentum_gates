@@ -29,6 +29,7 @@ def wigner_distribution(psi):
         ftrans=ft.fftshift(permuted_fft)
         wigner[position]=ftrans
     print "Average Imaginary Part: ", np.average(np.imag(wigner))
+    print "Maximum Imaginary Part: ", np.max(np.abs(np.imag(wigner)))
     wigner=np.real(wigner)
     return wigner.transpose()
 
