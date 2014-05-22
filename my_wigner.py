@@ -17,7 +17,7 @@ def wigner_distribution(psi):
             psi_copy_low[:-shift]=0.0
         elif shift>0:
             psi_copy_low[-shift:]=0.0
-        acorr=psi_copy_low*np.conj(psi_copy_low[::-1])
+        acorr=np.conj(psi_copy_low)*psi_copy_low[::-1]
         ftrans=ft.ifft(acorr)
         ftrans=ftrans*ftrans.size/pi
         #Removing the linear phase induced by the fft function
