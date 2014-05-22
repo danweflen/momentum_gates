@@ -19,6 +19,9 @@ def wigner_distribution(psi):
             psi_copy_low[-shift:]=0.0
         acorr=np.conj(psi_copy_low)*psi_copy_low[::-1]
         ftrans=ft.ifft(acorr)
+        #the fft is normalized, so if you want to evaluate the actual
+        #integral defined by the inverse fft, you have to multiply by
+        #the size of the transform.
         ftrans=ftrans*ftrans.size/pi
         #Removing the linear phase induced by the fft function
         #considering the first element as 0 rather than the
@@ -39,8 +42,6 @@ def wigner_distribution_2(psi):
     for position in np.arange(0,npts):
         width=min(position, npts-position)
         up=psi[position:position+width]
-        #position-width or None evaluates to None when
-        #position-width is equal to zero.
         down=psi[position-width+1:position+1]
         down=down[::-1]
         acorr=down*np.conj(up)
