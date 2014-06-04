@@ -29,3 +29,19 @@ def wigner_distribution(psi):
         ftrans=ft.fftshift(permuted_fft)
         wigner[position]=ftrans
     return wigner.transpose()
+
+def wigner_distribution_2(psi):
+    wigner=sp.zeros((psi.size,psi.size))
+    for position in np.arange(0,psi.size):
+        width=min(position+1, psi.size-position)
+        up=psi[position:position+width]
+        down=psi[position-width+1:position+1]
+        down=down[::-1]
+        acorr=down*np.conj(up)
+        ftrans=np.fft.irfft(acorr,n=psi.size)
+        ftrans=ftrans*psi.size/pi
+        #Shifting the fft itself back into place.
+        ftrans=ft.fftshift(ftrans)
+        wigner[position]=ftrans
+    return wigner.transpose()
+
