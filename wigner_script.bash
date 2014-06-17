@@ -20,7 +20,7 @@
 
 #PBS -l nodes=1:ppn=8
 
-#PBS -N one_wigner
+#PBS -N wigner_plots
 
 export PYTHONPATH=$PYTHONPATH:/users/becker/weflen/npsf_h/npsflib/python
 export PATH=/users/becker/weflen/progs/anaconda/bin:$PATH:/usr/local/cuda/bin
@@ -29,6 +29,6 @@ DATA_DIR=/users/becker/weflen/data/poly/momentum_gate_check/momentum_gate_check_
 
 DATA_FILE=$DATA_DIR/wavefunction_file_*.h5
 
-/users/becker/weflen/momentum_gates/one_wigner.py $DATA_FILE
+/users/becker/weflen/momentum_gates/wigner_plots.py $DATA_FILE
 
 echo "Done"
