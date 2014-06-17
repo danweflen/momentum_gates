@@ -2,6 +2,7 @@ import math
 import scipy as sp
 import scipy.fftpack as ft
 import numpy as np
+from math import pi
 
 def wigner_distribution(psi):
     #psi is assumed to be a numpy array
