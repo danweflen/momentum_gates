@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Wall Clock time
-#PBS -l walltime=6:00:00
+#PBS -l walltime=72:00:00
 
 #Merge stdout and stderr
 #PBS -j oe
@@ -18,16 +18,16 @@
 #Don't rerun a job if it fails
 #PBS -r n
 
-#PBS -l nodes=1:ppn=6
+#PBS -l nodes=1:ppn=8
 
 #PBS -N one_wigner
 
 export PYTHONPATH=$PYTHONPATH:/users/becker/weflen/npsf_h/npsflib/python
 export PATH=/users/becker/weflen/progs/anaconda/bin:$PATH:/usr/local/cuda/bin
 
-DATA_DIR=/data/becker/weflen/poly/momentum_gate_norio_exact/
+DATA_DIR=/users/becker/weflen/data/poly/momentum_gate_check/momentum_gate_check__2/
 
-DATA_FILE=$DATA_DIR/momentum_gate_norio_exact/wavefunction_file_key_2000.wfn.h5
+DATA_FILE=$DATA_DIR/wavefunction_file_*.h5
 
 /users/becker/weflen/momentum_gates/one_wigner.py $DATA_FILE
 
