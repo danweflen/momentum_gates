@@ -1,7 +1,8 @@
 #! /usr/bin/env python
 import numpy as np
 import scipy as sp
-from my_wigner import wigner_distribution
+import time
+from my_wigner import *
 import matplotlib.pyplot as plt
 from math import pi
 
@@ -45,7 +46,7 @@ np.save("test.npy",test)
 grid.resize(wig.shape[1])
 fig=plt.figure()
 ana_ax=fig.add_subplot(211)
-ana_im=ana_ax.contourf(T,S,ana,np.array([0.01*x for x in range(-1,51)]),cmap="jet")
+ana_im=ana_ax.contourf(T,S,ana,50,cmap="jet")
 ana_ax.set_title("ana")
 plt.xlim(-10,10)
 plt.ylim(-10,10)
